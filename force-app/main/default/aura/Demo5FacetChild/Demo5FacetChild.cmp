@@ -1,0 +1,10 @@
+<aura:component extends="c:Demo5ParentFacet">
+    <p>This is child facet</p>
+    <aura:attribute name="aurachildfacet" type="Aura.Component[]" default="" />
+    <c:Demo3AuraAllAttributes mystring="hellow vicky" />
+
+    <p>child attribute : {!v.aurachildfacet}</p>
+    {!v.body}
+    <p>This is child facet test : {!v.parenttestdata}</p>
+
+</aura:component>

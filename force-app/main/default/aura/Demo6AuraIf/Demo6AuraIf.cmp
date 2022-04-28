@@ -1,0 +1,12 @@
+<aura:component>
+    <aura:attribute name="truthy" type="Boolean" default="true" />
+    <aura:attribute name="buttonlable" type="String" default="Show False" />
+    <aura:if isTrue="{!v.truthy}">
+          True
+        <aura:set attribute="else">
+          False
+        </aura:set>
+      </aura:if> 
+
+      <lightning:button label="{!v.buttonlable}" title="show data values" onclick="{! c.handleClick }"/>
+</aura:component>

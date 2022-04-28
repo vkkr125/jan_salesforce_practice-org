@@ -1,0 +1,28 @@
+<aura:component controller="FindToppers">
+    <aura:attribute name="collegeList" type="College__c[]" />
+
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}"/>
+
+    <aura:attribute name="selectedCollegeId" type="String" default="none"/>
+    <aura:handler name="change" value="{!v.selectedCollegeId}" action="{!c.getTopper}"/>
+    <aura:attribute name="topperName" type="String" />
+    <aura:attribute name="totalMarks" type="String" />
+
+    
+
+    <lightning:select name="select1" label="Select College Name To Get Topper Student ->) " required="true" value="{!v.selectedCollegeId}">
+        <option value="none">choose one...</option>
+        <aura:iteration items="{!v.collegeList}" var="item">
+            <option value="{!item.Id}">{!item.Name}</option>
+        </aura:iteration>
+    </lightning:select>
+
+    <aura:if isTrue="{!v.collegeList.length == 0}">
+         College Doesn't Have Any Student
+        <aura:set attribute="else">
+            <p>College Topper Name : {!v.topperName} With Toal Marks : {!v.totalMarks}</p>
+        </aura:set>
+    </aura:if> 
+
+
+</aura:component>

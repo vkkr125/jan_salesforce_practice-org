@@ -1,0 +1,116 @@
+<template>
+
+    <!-- select the account Id -->
+    <div class="slds-form-element">
+        <label class="slds-form-element__label" for="select-01">Select Account</label>
+        <div class="slds-form-element__control">
+            <div class="slds-select_container">
+                <select if:true={account_available} class="slds-select" id="select-01" onchange={handleChange}>
+                    <option value="">Select…</option>
+                    <template for:each={accounts} for:item="account">
+                        <option key={account.Id} value={account.Id}>{account.Name}</option>
+                    </template>
+                </select>
+            </div>
+        </div>
+    </div>
+
+    <!-- display all the contacts of that account in custom datatable -->
+    <template if:true={contact_available}>
+        <h1>Contact Information</h1>
+        <table class="slds-table slds-table_cell-buffer slds-table_bordered"
+            aria-labelledby="element-with-table-label other-element-with-table-label">
+            <thead>
+                <tr class="slds-line-height_reset">
+                    <template for:each={contact_head} for:item="title">
+                        <th key={Id} class="" scope="col">
+                            <div class="slds-truncate" title={title}>{title}</div>
+                        </th>
+                    </template>
+                </tr>
+            </thead>
+            <tbody>
+                <template for:each={contacts} for:item="contact">
+                    <tr key={contact.Id} class="slds-hint-parent">
+                        <th data-label="Contact Id" scope="row">
+                            <div class="slds-truncate" title="Cloudhub">
+                                <a href={contact.Id} tabindex="-1">{contact.Id}</a>
+                            </div>
+                        </th>
+                        <td data-label="First Name">
+                            <div class="slds-truncate" title="First Name">{contact.FirstName}</div>
+                        </td>
+                        <td data-label="Last name">
+                            <div class="slds-truncate" title="LastName">{contact.LastName}</div>
+                        </td>
+                        <td data-label="Phone">
+                            <div class="slds-truncate" title="Phone">{contact.Phone}</div>
+                        </td>
+                        <td data-label="Title">
+                            <div class="slds-truncate" title="Title">{contact.Title}</div>
+                        </td>
+                        <td data-label="Email">
+                            <div class="slds-truncate" title="Email">
+                                <a href="#" tabindex="-1">{contact.Email}</a>
+                            </div>
+                        </td>
+                    </tr>
+                </template>
+                
+            </tbody>
+        </table>
+    </template>
+    
+    <!-- display all the opportunity of that account in custom datatable -->
+    <template if:true={opportunity_available}>
+        <h1>Opportunity Information</h1>
+        <table class="slds-table slds-table_cell-buffer slds-table_bordered"
+            aria-labelledby="element-with-table-label other-element-with-table-label">
+            <thead>
+                <tr class="slds-line-height_reset">
+                    <template for:each={opportunity_head} for:item="title">
+                        <th key={Id} class="" scope="col">
+                            <div class="slds-truncate" title={title}>{title}</div>
+                        </th>
+                    </template>
+                </tr>
+            </thead>
+            <tbody>
+                <template for:each={opportunities} for:item="opportunity">
+                    <tr key={opportunity.Id} class="slds-hint-parent">
+                        <th data-label="Opportunity Id" scope="row">
+                            <div class="slds-truncate" title="Opportunity Id">
+                                <a href={opportunity.Id} tabindex="-1">{opportunity.Id}</a>
+                            </div>
+                        </th>
+                        <td data-label="StageName">
+                            <div class="slds-truncate" title="Stage Name">{opportunity.stageName}</div>
+                        </td>
+                        <td data-label="Close Date">
+                            <div class="slds-truncate" title="Close Date">{opportunity.CloseDate}</div>
+                        </td>
+                        <td data-label="Amount">
+                            <div class="slds-truncate" title="Amount">{opportunity.Amount}</div>
+                        </td>
+                        <td data-label="Owner Contact">
+                            <div class="slds-truncate" title="Email">
+                                <a href="#" tabindex="-1">{opportunity.Owner.Email}</a>
+                            </div>
+                        </td>
+                    </tr>
+                </template>
+                
+            </tbody>
+        </table>
+    </template>
+    
+    <!-- <lightning-combobox
+            name="progress"
+            label="Status"
+            value={value}
+            placeholder="Select Progress"
+            options={options}
+            onchange={handleChange} ></lightning-combobox>
+
+    <p>Selected value is: {value}</p> -->
+</template>

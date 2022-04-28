@@ -1,0 +1,72 @@
+<aura:component controller="FindToppers">
+   
+    <aura:handler name="init" action="{!c.doInit}" value="{!this}" />
+    <aura:attribute name="paginationList" type="List" />
+    <aura:attribute name="page_size" type="Integer" default="0" />
+    <aura:attribute name="start" type="Integer" default="0" />
+    <aura:attribute name="offset" type="Integer" default="0" />
+    <aura:attribute name="end" type="Integer" default="0" />
+    <aura:attribute name="totalSize" type="Integer" default="0" />
+
+    <aura:attribute name="next_disable" type="Boolean" default="false" />
+    <aura:attribute name="end_disable" type="Boolean" default="false" />
+   
+
+    <div>
+        <div class="row">
+            <p class="title">Show</p>
+            <ui:inputSelect class="single" aura:id="record" change="{!c.onSelectChange}">
+                    <ui:inputSelectOption text="5"/>
+                    <ui:inputSelectOption text="10" />
+                    <ui:inputSelectOption text="20"/>
+                    <ui:inputSelectOption text="30"/>
+                </ui:inputSelect>
+            </div>    
+    </div>
+    <table class="slds-table slds-table_cell-buffer slds-table_bordered"
+        aria-labelledby="element-with-table-label other-element-with-table-label">
+        <thead>
+            <tr class="slds-line-height_reset">
+                <th class="" scope="col">
+                    <div class="slds-truncate" title="Student Id">Student Id</div>
+                </th>
+                <th class="" scope="col">
+                    <div class="slds-truncate" title="Student Name">Student Name</div>
+                </th>
+                <th class="" scope="col">
+                    <div class="slds-truncate" title="Student Email">Student Email</div>
+                </th>
+                <th class="" scope="col">
+                    <div class="slds-truncate" title="Total Marks">Total Marks</div>
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+
+            <aura:iteration items="{!v.paginationList}" var="item" >
+                <tr class="slds-hint-parent">
+                    <th data-label="Student Id" scope="row">
+                        <div class="slds-truncate" title="Student Id">
+                            <a href="#" tabindex="-1">{!item.Id}</a>
+                        </div>
+                    </th>
+                    <td data-label="Student Name">
+                        <div class="slds-truncate" title="Cloudhub">{!item.Name}</div>
+                    </td>
+                    <td data-label="Contact">
+                        <div class="slds-truncate" title="jrogers@cloudhub.com">
+                            <a href="#" tabindex="-1">{!item.Student_Email__c}</a>
+                        </div>
+                    </td>
+                    <td data-label="Total">
+                        <div class="slds-truncate" title="Total Marks">{!item.Total_Marks__c}</div>
+                    </td>
+                </tr>
+            </aura:iteration>
+            <lightning:button label="First" disabled="{!v.start==0}" onclick="{!c.first}" />
+            <lightning:button label="Previous" disabled="{!v.start==0}" onclick="{!c.previous}" />
+            <lightning:button label="Next" disabled="{! v.end >= v.totalSize}" onclick="{!c.next}" />
+            <lightning:button label="Last" disabled="{! v.end >= v.totalSize}" onclick="{!c.last}" />
+        </tbody>
+    </table>
+</aura:component>

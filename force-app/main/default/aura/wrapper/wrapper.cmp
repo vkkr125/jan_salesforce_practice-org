@@ -1,0 +1,282 @@
+<aura:component controller="DemoWrapper">
+    <aura:attribute name="accountList" type="List" />
+    <aura:attribute name="selectedAccountId" type="String" default="none" />
+    <aura:attribute name="view" type="Object" />
+    <aura:attribute name="editcontact" type="Boolean" default="false" />
+    <aura:attribute name="check_list" type="List" />
+    <aura:attribute name="opp_check_list" type="List" />
+    <aura:attribute name="oppStageList" type="List" />
+    <aura:attribute name="editopportunity" type="Boolean" default="false" />
+    <aura:attribute name="contact_search_value" type="String" default=""/>
+    <aura:attribute name="opportunity_search_value" type="String" default=""/>
+
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}" />
+    <aura:handler name="change" value="{!v.selectedAccountId}" action="{!c.onAccountSelected}" />
+    <aura:handler name="change" value="{!v.contact_search_value}" action="{!c.searchcontact}"/>
+    <aura:handler name="change" value="{!v.opportunity_search_value}" action="{!c.searchopportunity}"/>
+
+
+    <lightning:select value="{!v.selectedAccountId}" name="select1" label="How many tickets?" required="true">
+        <option value="{!v.selectedAccountId}">choose one...</option>
+        <aura:iteration items="{!v.accountList}" var="item">
+            <option value="{!item.Id}">{!item.Name}</option>
+        </aura:iteration>
+    </lightning:select>
+
+    <br />
+    <aura:if isTrue="{!v.selectedAccountId == 'none'}">
+        Select Account From Drop Down
+        <aura:set attribute="else">
+            <section>
+                <!-- contact information -->
+                <h1 style="font: 16px;"> Contact Information</h1>
+                <div class="Contact">
+                    <aura:if isTrue="{!v.editcontact == true}">
+                        <lightning:button label="Save" title="Neutral action" onclick="{! c.handleAllSaveContact }" />
+                        <aura:set attribute="else">
+                            <lightning:button label="Edit" title="Neutral action"
+                                onclick="{! c.hadleAllEditContact }" />
+                            <lightning:button label="Add New Contact" title="Neutral action"
+                                onclick="{! c.addNewContact }" />
+                            <lightning:input class="slds-input slds-combobox__input" label="" placeholder="search..." value="{!v.contact_search_value}"/>
+                        </aura:set>
+                    </aura:if>
+                    <table class="slds-table slds-table_cell-buffer slds-table_bordered"
+                        aria-label="Example default base table of Opportunities">
+                        <thead>
+                            <tr class="slds-line-height_reset">
+                                <th class="" scope="col">
+                                    <div class="slds-truncate" title="contact Id">select</div>
+                                </th>
+                                <th class="" scope="col">
+                                    <div class="slds-truncate" title="contact Id">Contact Id</div>
+                                </th>
+                                <th class="" scope="col">
+                                    <div class="slds-truncate" title="First Name">Contact First Name</div>
+                                </th>
+                                <th class="" scope="col">
+                                    <div class="slds-truncate" title="Last Name">Contact Last Name</div>
+                                </th>
+                                <th class="" scope="col">
+                                    <div class="slds-truncate" title="Phone">Contact Phone</div>
+                                </th>
+                                <th class="" scope="col">
+                                    <div class="slds-truncate" title="Email">Contact Email</div>
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+
+                            <aura:iteration items="{!v.view.wrapper_contactList}" var="item">
+                                <tr class="slds-hint-parent">
+                                    <td data-label="select">
+                                        <ui:inputCheckbox aura:id="checkbox" name="{!item.contactObj.Id}"
+                                            change="{!c.onContactCheck}" />
+                                    </td>
+                                    <th data-label="Opportunity Name" scope="row">
+                                        <div class="slds-truncate" title="Cloudhub">
+                                            <aura:if isTrue="{!item.isEditable}">
+                                                <a href="{! '/' + item.contactObj.Id}" tabindex="-1">
+                                                    <lightning:input name="input1" value="{!item.Id}" disabled="true" />
+                                                </a>
+                                                <aura:set attribute="else">
+                                                    <a href="{! '/' + item.contactObj.Id}" tabindex="-1"
+                                                        target="_blank">
+                                                        {!item.contactObj.Id}
+                                                    </a>
+                                                </aura:set>
+                                            </aura:if>
+                                        </div>
+                                    </th>
+                                    <td data-label="First Name">
+                                        <div class="slds-truncate" title="Cloudhub">
+                                            <aura:if isTrue="{!item.isEditable}">
+                                                <lightning:input name="input1" value="{!item.contactObj.FirstName}"
+                                                    disabled="fale" />
+                                                <aura:set attribute="else">
+                                                    {!item.contactObj.FirstName}
+                                                </aura:set>
+                                            </aura:if>
+                                        </div>
+                                    </td>
+                                    <td data-label="Close Date">
+                                        <div class="slds-truncate" title="Cloudhub">
+                                            <aura:if isTrue="{!item.isEditable}">
+                                                <lightning:input name="FirstName" value="{!item.contactObj.LastName}"
+                                                    disabled="false" />
+                                                <aura:set attribute="else">
+                                                    {!item.contactObj.LastName}
+                                                </aura:set>
+                                            </aura:if>
+                                        </div>
+                                    </td>
+                                    <td data-label="Prospecting">
+                                        <div class="slds-truncate" title="Cloudhub">
+                                            <aura:if isTrue="{!item.isEditable}">
+                                                <lightning:input name="LastName" value="{!item.contactObj.Phone}"
+                                                    disabled="false" />
+                                                <aura:set attribute="else">
+                                                    {!item.contactObj.Phone}
+                                                </aura:set>
+                                            </aura:if>
+                                        </div>
+                                    </td>
+                                    <td data-label="Contact">
+                                        <div class="slds-truncate" title="jrogers@cloudhub.com">
+                                            <div class="slds-truncate" title="Cloudhub">
+                                                <aura:if isTrue="{!item.isEditable}">
+                                                    <a href="#" tabindex="-1">
+                                                        <lightning:input name="input1" value="{!item.contactObj.Email}"
+                                                            disabled="false" />
+                                                    </a>
+                                                    <aura:set attribute="else">
+                                                        <a href="#" tabindex="-1">
+                                                            {!item.contactObj.Email}
+                                                        </a>
+                                                    </aura:set>
+                                                </aura:if>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td data-label="Action">
+                                        <aura:if isTrue="{!item.isEditable}">
+                                            <lightning:button name="{!item.contactObj.Id}" label="Save"
+                                                title="Neutral action" onclick="{! c.handleSingleSave }" />
+                                        </aura:if>
+                                    </td>
+                                </tr>
+                            </aura:iteration>
+                        </tbody>
+                    </table>
+                </div>
+
+                <!-- opportunity information -->
+                <h1 style="font: 16px;">Opportunity Information</h1>
+                <div class="Oooportunity">
+                    <aura:if isTrue="{!v.editopportunity == true}">
+                        <lightning:button label="Save" title="Neutral action"
+                            onclick="{! c.handleAllSaveOpportunity }" />
+                        <aura:set attribute="else">
+                            <lightning:button label="Edit" title="Neutral action"
+                                onclick="{! c.hadleAllEditOpportunity }" />
+                            <lightning:button label="Add New Opportunity" title="Neutral action"
+                                onclick="{! c.addNewOpportunity }" />
+                                <lightning:input class="slds-input slds-combobox__input" label="" placeholder="search..." value="{!v.opportunity_search_value}"/>
+                            
+                        </aura:set>
+                    </aura:if>
+                    <table class="slds-table slds-table_cell-buffer slds-table_bordered"
+                        aria-label="Example default base table of Opportunities">
+                        <thead>
+                            <tr class="slds-line-height_reset">
+                                <th class="" scope="col">
+                                    <div class="slds-truncate" title="select">select</div>
+                                </th>
+                                <th class="" scope="col">
+                                    <div class="slds-truncate" title="OpportunityId">Opportunity Id</div>
+                                </th>
+                                <th class="" scope="col">
+                                    <div class="slds-truncate" title="OpportunityName">Opportunity Name</div>
+                                </th>
+                                <th class="" scope="col">
+                                    <div class="slds-truncate" title="StageName">Stage Name</div>
+                                </th>
+                                <th class="" scope="col">
+                                    <div class="slds-truncate" title="Amount">Amount</div>
+                                </th>
+                                <th class="" scope="col">
+                                    <div class="slds-truncate" title="Closed Date">Closed Date</div>
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <aura:iteration items="{!v.view.wrapper_opportunityList}" var="item">
+                                <tr class="slds-hint-parent">
+                                    <td data-label="select">
+                                        <ui:inputCheckbox aura:id="oppcheckbox" name="{!item.opportunityObj.Id}"
+                                            change="{!c.on_opportunity_check}" />
+                                    </td>
+                                    <th data-label="Opportunity Id" scope="row">
+                                        <div class="slds-truncate" title="Cloudhub">
+                                            <aura:if isTrue="{!item.isEditable}">
+                                                <a href="{! '/' + item.opportunityObj.Id}" tabindex="-1">
+                                                    <lightning:input name="input1" value="{!item.Id}" disabled="true" />
+                                                </a>
+                                                <aura:set attribute="else">
+                                                    <a href="{! '/' + item.opportunityObj.Id}" tabindex="-1"
+                                                        target="_blank">
+                                                        {!item.opportunityObj.Id}
+                                                    </a>
+                                                </aura:set>
+                                            </aura:if>
+                                        </div>
+                                    </th>
+                                    <td data-label="OpportunityName">
+                                        <div class="slds-truncate" title="Cloudhub">
+                                            <aura:if isTrue="{!item.isEditable}">
+                                                <lightning:input name="Name" value="{!item.opportunityObj.Name}"
+                                                    disabled="fale" />
+                                                <aura:set attribute="else">
+                                                    {!item.opportunityObj.Name}
+                                                </aura:set>
+                                            </aura:if>
+                                        </div>
+                                    </td>
+                                    <td data-label="Close Date">
+                                        <div class="slds-truncate" title="Cloudhub">
+                                            <aura:if isTrue="{!item.isEditable}">
+                                                <lightning:select name="StageName" label="Choose Stage" required="true"
+                                                    value="{!item.opportunityObj.StageName}" disabled="false">
+                                                    <option value="">choose one...</option>
+                                                    <aura:iteration items="{!v.oppStageList}" var="stage_item">
+                                                        <option value="{!stage_item}">{!stage_item}</option>
+                                                    </aura:iteration>
+                                                </lightning:select>
+
+                                                <aura:set attribute="else">
+                                                    {!item.opportunityObj.StageName}
+                                                </aura:set>
+                                            </aura:if>
+                                        </div>
+                                    </td>
+                                    <td data-label="Prospecting">
+                                        <div class="slds-truncate" title="Cloudhub">
+                                            <aura:if isTrue="{!item.isEditable}">
+                                                <lightning:input name="Amount" value="{!item.opportunityObj.Amount}"
+                                                    disabled="false" />
+                                                <aura:set attribute="else">
+                                                    {!item.opportunityObj.Amount}
+                                                </aura:set>
+                                            </aura:if>
+                                        </div>
+                                    </td>
+                                    <td data-label="Contact">
+                                        <div class="slds-truncate" title="jrogers@cloudhub.com">
+                                            <div class="slds-truncate" title="Cloudhub">
+                                                <aura:if isTrue="{!item.isEditable}">
+                                                    <lightning:input name="input1" type="date"
+                                                        value="{!item.opportunityObj.CloseDate}" disabled="false" />
+                                                    <aura:set attribute="else">
+                                                        {!item.opportunityObj.CloseDate}
+                                                    </aura:set>
+                                                </aura:if>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td data-label="Action">
+                                        <aura:if isTrue="{!item.isEditable}">
+                                            <lightning:button name="{!item.opportunityObj.Id}" label="Save"
+                                                title="Neutral action" onclick="{! c.handleSingleOppSave }" />
+                                        </aura:if>
+                                    </td>
+                                </tr>
+                            </aura:iteration>
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+        </aura:set>
+    </aura:if>
+
+
+</aura:component>

@@ -1,0 +1,17 @@
+<template>
+
+    <lightning-card title="Cotact Information" icon-name="standard:contact">
+        <div class="slds-m-around_large">
+            <template if:true={contact_data.data}>
+                <lightning-datatable
+                key-field="Id"
+                data={contact_data.data}
+                columns={columns}
+                onsave={handleSave}
+                draft-values={draftValues}>
+            </lightning-datatable>
+            </template>
+        </div>
+    </lightning-card>
+    
+</template>

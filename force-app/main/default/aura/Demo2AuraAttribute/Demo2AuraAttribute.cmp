@@ -1,0 +1,16 @@
+<aura:component>
+    <aura:attribute name="label" type="String" default="Name Label" />
+    <aura:attribute name="myname" type="String" default="Vicky Kumar" />
+    <aura:attribute name="NameList" type="List" default="['vicky','kumar','rakesh','tiwar']" />
+
+   <div>
+        <p>Name Label : {!v.label}</p>
+        <p>My Name : {!myname}</p>
+
+        <h1>Aura Iteration</h1>
+        <aura:iteration items="{!v.NameList}" var="item">
+           <p>{!item}</p>
+        </aura:iteration>
+   </div>
+
+</aura:component>

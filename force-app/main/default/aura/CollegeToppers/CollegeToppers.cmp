@@ -1,0 +1,70 @@
+<aura:component controller="FindToppers">
+
+    <aura:attribute name="showSpinner" type="Boolean" default="false" />
+    <lightning:button variant="brand" label="Fetch Toppers" title="Brand action" onclick="{! c.findToppers }" />
+    <aura:attribute name="student_data" type="List" />
+
+    
+    <!-- <aura:iteration items="{!v.student_data}" var="item" indexVar="idx">
+        <p>{!item.College_Name}</p>
+        <p>{!item.Student_Name}</p>
+        <p>{!item.Total_Marks}</p>
+    </aura:iteration> -->
+
+    <aura:if isTrue="{!v.showSpinner}">
+        <div class="demo-only demo-only_viewport" style="height:6rem;position:relative">
+            <div role="status" class="slds-spinner slds-spinner_medium">
+                <span class="slds-assistive-text">Loading</span>
+                <div class="slds-spinner__dot-a"></div>
+                <div class="slds-spinner__dot-b"></div>
+            </div>
+        </div>
+        <aura:set attribute="else">
+            <table class="slds-table slds-table_cell-buffer slds-table_bordered"
+        aria-labelledby="element-with-table-label other-element-with-table-label">
+        <thead>
+            <tr class="slds-line-height_reset">
+                <th class="" scope="col">
+                    <div class="slds-truncate" title="College Id">College Id</div>
+                </th>
+                <th class="" scope="col">
+                    <div class="slds-truncate" title="College Name">College Name</div>
+                </th>
+                <th class="" scope="col">
+                    <div class="slds-truncate" title="Student Name">Student Name</div>
+                </th>
+                <th class="" scope="col">
+                    <div class="slds-truncate" title="Total Marks">Total Marks</div>
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            <aura:iteration items="{!v.student_data}" var="item">
+                <tr class="slds-hint-parent">
+                    <th data-label="College Id" scope="row">
+                        <div class="slds-truncate" title="College Id">
+                            <a href="{!'/' + !item.Id}" tabindex="-1">{!item.Id}</a>
+                        </div>
+                    </th>
+                    <td data-label="College Name">
+                        <div class="slds-truncate" title="College Name">{!item.College_Name}</div>
+                    </td>
+                    <td data-label="Student Name">
+                        <div class="slds-truncate" title="Student Name">{!item.Student_Name}</div>
+                    </td>
+                    <td data-label="Total Marks">
+                        <div class="slds-truncate" title="Total Marks">{!item.Total_Marks}</div>
+                    </td>
+                </tr>
+            </aura:iteration>
+
+
+        </tbody>
+    </table>
+        </aura:set>
+      </aura:if> 
+    
+
+   
+    
+</aura:component>

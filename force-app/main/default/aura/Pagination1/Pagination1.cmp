@@ -1,0 +1,106 @@
+<aura:component controller="FindToppers">
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}" />
+    <aura:attribute name="paginationList" type="List" />
+    <aura:attribute name="studentList" type="List" />
+    <aura:attribute name="page_size" type="Integer" default="5" />
+    <aura:attribute name="start" type="Integer" default="0" />
+    <aura:attribute name="end" type="Integer" default="0" />
+    <aura:attribute name="total_size" type="Integer" default="0" />
+    <aura:Attribute name='searchinput' type = 'string' />
+    <aura:attribute name="searchList" type="List" />
+
+    <aura:handler name="change" value="{!v.searchinput}" action="{!c.findData}" />  
+    <div>
+        <div class="row">
+            <div>
+                <p class="title">Show</p>
+            </div>
+            <div>
+                <ui:inputSelect class="single" aura:id="records" change="{!c.onselect}">
+                    <ui:inputSelectOption text="5" />
+                    <ui:inputSelectOption text="10" />
+                    <ui:inputSelectOption text="20" />
+                    <ui:inputSelectOption text="30" />
+                </ui:inputSelect>
+            </div>
+            <div>
+                <lightning:input name="x" value="{!v.searchinput}" label="Filter" placeholder="Search students by name "/>  
+            </div>
+        </div>
+
+        <!-- data table -->
+        <table class="slds-table slds-table_cell-buffer slds-table_bordered"
+            aria-labelledby="element-with-table-label other-element-with-table-label">
+            <thead>
+                <tr class="slds-line-height_reset">
+                    <th class="" scope="col">
+                        <div class="slds-truncate" title="Student Id">Student Id</div>
+                    </th>
+                    <th class="" scope="col">
+                        <div class="slds-truncate" title="Student Name">Student Name</div>
+                    </th>
+                    <th class="" scope="col">
+                        <div class="slds-truncate" title="Student Email">Total Marks</div>
+                    </th>
+                    <th class="" scope="col">
+                        <div class="slds-truncate" title="Total Marks">Student Email</div>
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+
+                <aura:if isTrue="{!v.searchList.length > 0}">
+                    <aura:iteration items="{!v.searchList}" var="item">
+                        <tr class="slds-hint-parent">
+                            <th data-label="Student Id" scope="row">
+                                <div class="slds-truncate" title="Student Id">
+                                    <a href="#" tabindex="-1">{!item.Id}</a>
+                                </div>
+                            </th>
+                            <td data-label="Student Name">
+                                <div class="slds-truncate" title="{!item.Name}">{!item.Name}</div>
+                            </td>
+                            <td data-label="Total Marks">
+                                <div class="slds-truncate" title="{!item.Total_Marks__c}">{!item.Total_Marks__c}</div>
+                            </td>
+                            <td data-label="Email">
+                                <div class="slds-truncate" title="jrogers@cloudhub.com">
+                                    <a href="#" tabindex="-1">{!item.Student_Email__c}</a>
+                                </div>
+                            </td>
+                        </tr>
+                    </aura:iteration>
+                    <aura:set attribute="else">
+                        <aura:iteration items="{!v.paginationList}" var="item">
+                            <tr class="slds-hint-parent">
+                                <th data-label="Student Id" scope="row">
+                                    <div class="slds-truncate" title="Student Id">
+                                        <a href="#" tabindex="-1">{!item.Id}</a>
+                                    </div>
+                                </th>
+                                <td data-label="Student Name">
+                                    <div class="slds-truncate" title="{!item.Name}">{!item.Name}</div>
+                                </td>
+                                <td data-label="Total Marks">
+                                    <div class="slds-truncate" title="{!item.Total_Marks__c}">{!item.Total_Marks__c}
+                                    </div>
+                                </td>
+                                <td data-label="Email">
+                                    <div class="slds-truncate" title="jrogers@cloudhub.com">
+                                        <a href="#" tabindex="-1">{!item.Student_Email__c}</a>
+                                    </div>
+                                </td>
+                            </tr>
+                        </aura:iteration>
+                    </aura:set>
+                </aura:if>
+            </tbody>
+        </table>
+        <lightning:button aura:id="input1" label="first" title="Brand action" disabled="{! v.start == 0}" onclick="{! c.first }" />
+        <lightning:button aura:id="input1" label="previous" title="Brand action" disabled="{! v.start == 0}" onclick="{! c.previous }" />
+        <lightning:button aura:id="input1" label="next" title="Brand action" disabled="{! v.end >= v.total_size}" onclick="{! c.next }" />
+        <lightning:button aura:id="input1" label="last" title="Brand action" disabled="{! v.end >= v.total_size}"
+            onclick="{! c.last }" />
+    </div>
+
+</aura:component>

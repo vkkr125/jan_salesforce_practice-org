@@ -1,0 +1,9 @@
+<aura:component extensible="true">
+    <p>Parent Facet component</p>
+    <aura:attribute name="parenttestdata" type="String" default="test parent data" />
+    <br/><br/> <br/> <br/>
+     <p>+++++++++++++++++++++++++++++++++++++++++++++</p>
+     <br/><br/> <br/> <br/>
+     {!v.body}
+
+</aura:component>

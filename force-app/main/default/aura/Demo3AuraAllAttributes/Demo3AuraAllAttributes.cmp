@@ -1,0 +1,67 @@
+<aura:component>
+    <aura:attribute name="mystring" type="String" default="vicky kumar" />
+    <aura:attribute name="jsObject" type="Object" default="" />
+    <aura:attribute name="myAccount" type="Account" default="{'sobjectType' : 'Account', 'Name' : 'Test Aura Account', 'Active__c' : 'Yes'}" />
+    <aura:attribute name="myCollege" type="College__c" default="{'sobjectType' : 'College__c', 'Name' : 'Test Aura College', 'is_Active__c' : true}" />
+    <aura:attribute name="nameList" type="String[]" default="['vicky', 'kumar', 'tiwari', 'tanu', 'tiwari']" />
+    <aura:attribute name="colorList" type="List" default="['red', 'green', blue','black']" />
+    <aura:attribute name="colorSet" type="Set" default="['red', 'green', blue','black']" />
+    <aura:attribute name="colorMap" type="Map" default="{key1 : 'red', key2 : 'blue', key3 : 'green'}" />
+    <aura:attribute name="myCustomeWrapper" type="MyDemoWrapper" />
+
+    <aura:handler name="init" value="{!this}" action="c.doInit" />
+
+    <div>
+        <table>
+           <thead >
+               <th>type</th>
+               <th>Attribute</th>
+               <th>Value</th>
+           </thead>
+           <tbody>
+                <tr>
+                    <td>Basic String</td>
+                    <td>mystring</td>
+                    <td>{!v.mystring}</td>
+                </tr>
+                <tr>
+                    <td>User Defined Data Type</td>
+                    <td>myCustomeWrapper</td>
+                    <td>{!v.myCustomeWrapper.FirstName} -- {!v.myCustomeWrapper.Email}</td>
+                </tr>
+                <tr>
+                    <td>Javascript Object</td>
+                    <td>jsObject</td>
+                    <td>{!v.jsObject.FirstName} - {!v.jsObject.LastName}</td>
+                </tr>
+                <tr>
+                    <td>Standard Object</td>
+                    <td>myaccount</td>
+                    <td>{!v.myAccount.Name} -- {!v.myAccount.Active__c}</td>
+                </tr>
+                <tr>
+                    <td>Custome Object</td>
+                    <td>College__c</td>
+                    <td>{!v.myCollege.Name} -- {!v.myCollege.is_Active__c}</td>
+                </tr>
+                <tr>
+                    <td>List</td>
+                    <td>colorList</td>
+                    <td>{!v.colorList[0]} -- {!v.colorList[1]}</td>
+                </tr>
+                <tr>
+                    <td>Set</td>
+                    <td>colorSet</td>
+                    <td>{!v.colorSet.length}</td>
+                </tr>
+                <tr>
+                    <td>Map</td>
+                    <td>colorMap</td>
+                    <td>{!v.colorMap.key1} --- {!v.colorMap.key2}</td>
+                </tr>
+           </tbody>
+        </table>
+    </div>
+
+
+</aura:component>

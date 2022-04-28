@@ -1,0 +1,18 @@
+.THIS .title {
+    padding-top: 10px;
+    padding-bottom: 10px;
+    display: inline;
+    font-weight: bold;
+}
+.THIS.row {
+    padding-left: 10px;
+}
+
+.THIS .result {
+    color: green;
+}
+
+.THIS p {
+    padding-top: 5px;
+    padding-bottom: 10px;
+}

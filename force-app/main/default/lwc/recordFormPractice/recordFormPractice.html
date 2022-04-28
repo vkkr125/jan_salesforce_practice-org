@@ -1,0 +1,32 @@
+<template>
+
+    <!--  view the record usign lightnig-record-form -->
+    
+    <lightning-card  title="Contact Information" icon-name="standard:contact">
+        <div class="slds-m-left_medium">
+            <!-- we can only view the data -->
+            <!-- <lightning-record-form object-api-name={objectApiName} mode = 'readonly' record-id={recordId} fields={fields}></lightning-record-form> -->
+            <!-- we can edit can view both -->
+            <!-- <lightning-record-form object-api-name={objectApiName} mode = 'view' record-id={recordId} fields={fields}></lightning-record-form> -->
+            <!-- only edit mode// user can edit the data and can submit -->
+            <!-- <lightning-record-form object-api-name={objectApiName} mode = 'edit' record-id={recordId} fields={fields}></lightning-record-form> -->
+
+            <!-- submitting the data by modifying it -->
+            <!-- <lightning-record-form object-api-name={objectApiName} 
+            mode = 'view' record-id={recordId} fields={fields}
+            onsubmit={handleSubmit}
+            ></lightning-record-form> -->
+
+            <!-- create record // do not give Id field it will become -->
+            <lightning-record-form object-api-name={objectApiName} fields={fields} onsuccess={handleSuccess}></lightning-record-form>
+
+            
+
+    
+        </div>
+    </lightning-card>
+</template>
+
+
+
+<!-- view record,edit,readonly,edit with processing, create record -->

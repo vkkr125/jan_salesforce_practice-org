@@ -1,0 +1,51 @@
+<template>
+    <lightning-card title="Record View Form Demo 2" icon-name="standard:Account">
+        <div class="slds-m-left_medium">
+
+
+            <!-- display data with each field name -->
+            <!-- <lightning-record-view-form object-api-name={objectApiName}  record-id={recordId}>
+                <lightning-output-field field-name="FirstName"> </lightning-output-field>
+                <lightning-output-field field-name="LastName"> </lightning-output-field>
+                <lightning-output-field field-name="Phone"> </lightning-output-field>
+                <lightning-output-field field-name="Email"> </lightning-output-field>
+
+            </lightning-record-view-form> -->
+
+
+            <!-- display data via iterating -->
+            <!-- <lightning-record-view-form object-api-name={objectApiName}  record-id={recordId}>
+                <template for:each={fields} for:item="field_name">
+                    <lightning-output-field key={Id} field-name={field_name}></lightning-output-field>
+                </template>    
+            </lightning-record-view-form> -->
+
+
+            <!-- record-edit-form / to create data do not pass Id-->
+            <!-- <lightning-record-edit-form object-api-name={objectApiName} onsuccess={handleSuccess} >
+                <div class="slds-m-around_medium">
+                    <template for:each={fields} for:item="field_name">
+                        <lightning-input-field key={Id} field-name={field_name}  value={value}></lightning-input-field>
+                    </template>
+                    <div class="slds-m-top_medium">
+                        <lightning-button variant="brand" type="submit" name="save" label="Create Contact"> </lightning-button>
+                    </div>
+                </div>
+             </lightning-record-edit-form> -->
+
+             <!-- record edit from -->
+             <lightning-record-edit-form object-api-name={objectApiName} record-id={recordId} onsuccess={handleSuccess} >
+                <div class="slds-m-around_medium">
+                    <template for:each={fields} for:item="field_name">
+                        <lightning-input-field key={Id} field-name={field_name}></lightning-input-field>
+                    </template>
+                    <div class="slds-m-top_medium">
+                        <lightning-button variant="brand" type="submit" name="save" label="Update"> </lightning-button>
+                    </div>
+                </div>
+             </lightning-record-edit-form>
+
+
+        </div>
+    </lightning-card>
+</template>

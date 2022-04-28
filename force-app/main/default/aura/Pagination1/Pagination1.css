@@ -1,0 +1,39 @@
+.THIS .title {
+    display: inline;
+    font-size: 16px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    font-weight: bold;
+    margin: 10px;
+    
+}
+.THIS .result {
+    color: green;
+}
+.THIS .single{
+    display:  inline-block;
+}
+
+.THIS p {
+    padding-top: 5px;
+    padding-bottom: 10px;
+}
+.THIS .searchinput{
+    
+    color: red;
+    box-shadow: 2px 2px 14px rgb(206, 191, 191);
+    width: 20%;
+    float: right;
+    margin-right: 10%;
+    top:-35%;
+}
+
+.THIS .row{
+    display: grid;
+    grid-template-columns: 0.2fr 0.2fr 4fr;
+   
+}
+
+.THIS .show{
+    display: none;
+}

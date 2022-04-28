@@ -1,0 +1,6 @@
+<aura:component>
+    <p>This is first aura component </p>
+    <p>Hellow world , welcome to parctice org</p>
+    <h1>Hello, start your aura january</h1>
+    
+</aura:component>
