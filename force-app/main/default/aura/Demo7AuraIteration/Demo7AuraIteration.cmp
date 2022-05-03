@@ -1,74 +1,73 @@
 <aura:component controller="DemoGetData">
     <aura:attribute name="studentList" type="Student__c[]" default="" />
     <aura:attribute name="courseList" type="Course__c[]" default="" />
-
     <aura:handler name="init" value="{!this}" action="{!c.doInit}" />
     <h1>Student Data</h1>
     <div>
-<table class="slds-table slds-table_cell-buffer slds-table_bordered"
-    aria-labelledby="element-with-table-label other-element-with-table-label">
-    <thead>
-        <tr class="slds-line-height_reset">
-            <th class="" scope="col">
-                <div class="slds-truncate" title="Student Id">Student Id</div>
-            </th>
-            <th class="" scope="col">
-                <div class="slds-truncate" title="Student Name">Student Name</div>
-            </th>
-            <th class="" scope="col">
-                <div class="slds-truncate" title="Student Email">Student Email</div>
-            </th>
-        </tr>
-    </thead>
-    <tbody>
+        <table class="slds-table slds-table_cell-buffer slds-table_bordered"
+            aria-labelledby="element-with-table-label other-element-with-table-label">
+            <thead>
+                <tr class="slds-line-height_reset">
+                    <th class="" scope="col">
+                        <div class="slds-truncate" title="Student Id">Student Id</div>
+                    </th>
+                    <th class="" scope="col">
+                        <div class="slds-truncate" title="Student Name">Student Name</div>
+                    </th>
+                    <th class="" scope="col">
+                        <div class="slds-truncate" title="Student Email">Student Email</div>
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
 
-        <aura:iteration items="{!v.studentList}" var="item">
-            <tr class="slds-hint-parent">
-                <th data-label="Student Id" scope="row">
-                    <div class="slds-truncate" title="Student Id">
-                        <a href="{!'/' + item.Id}" tabindex="-1">{!item.Id}</a>
-                    </div>
-                </th>
-                <td data-label="Account Name">
-                    <div class="slds-truncate" title="Student Name">{!item.Name}</div>
-                </td>
-                <td data-label="Close Date">
-                    <div class="slds-truncate" title="Student Email">{!item.Student_Email__c}</div>
-                </td>
-            </tr>
-        </aura:iteration>
-    </tbody>
-</table>
+                <aura:iteration items="{!v.studentList}" var="item">
+                    <tr class="slds-hint-parent">
+                        <th data-label="Student Id" scope="row">
+                            <div class="slds-truncate" title="Student Id">
+                                <a href="{!'/' + item.Id}" tabindex="-1">{!item.Id}</a>
+                            </div>
+                        </th>
+                        <td data-label="Account Name">
+                            <div class="slds-truncate" title="Student Name">{!item.Name}</div>
+                        </td>
+                        <td data-label="Close Date">
+                            <div class="slds-truncate" title="Student Email">{!item.Student_Email__c}</div>
+                        </td>
+                    </tr>
+                </aura:iteration>
+            </tbody>
+        </table>
 
-<h1>Student Course Data</h1>
-<table class="slds-table slds-table_cell-buffer slds-table_bordered"
-    aria-labelledby="element-with-table-label other-element-with-table-label">
-    <thead>
-        <tr class="slds-line-height_reset">
-            <th class="" scope="col">
-                <div class="slds-truncate" title="Course Id">Course Id</div>
-            </th>
-            <th class="" scope="col">
-                <div class="slds-truncate" title="Course Name">Course Name</div>
-            </th>
-        </tr>
-    </thead>
-    <tbody>
+        <h1>Student Course Data</h1>
+        <table class="slds-table slds-table_cell-buffer slds-table_bordered"
+            aria-labelledby="element-with-table-label other-element-with-table-label">
+            <thead>
+                <tr class="slds-line-height_reset">
+                    <th class="" scope="col">
+                        <div class="slds-truncate" title="Course Id">Course Id</div>
+                    </th>
+                    <th class="" scope="col">
+                        <div class="slds-truncate" title="Course Name">Course Name</div>
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
 
-        <aura:iteration items="{!v.courseList}" var="item">
-            <tr class="slds-hint-parent">
-                <th data-label="Course Id" scope="row">
-                    <div class="slds-truncate" title="Course Id">
-                        <a href="#" tabindex="-1">{!item.Id}</a>
-                    </div>
-                </th>
-                <td data-label="Course Name">
-                    <div class="slds-truncate" title="Course Name">{!item.Name}</div>
-                </td>
-            </tr>
-        </aura:iteration>
-    </tbody>
-</table>
+                <aura:iteration items="{!v.courseList}" var="item">
+                    <tr class="slds-hint-parent">
+                        <th data-label="Course Id" scope="row">
+                            <div class="slds-truncate" title="Course Id">
+                                <a href="#" tabindex="-1">{!item.Id}</a>
+                            </div>
+                        </th>
+                        <td data-label="Course Name">
+                            <div class="slds-truncate" title="Course Name">{!item.Name}</div>
+                        </td>
+                    </tr>
+                </aura:iteration>
+            </tbody>
+        </table>
 
 
     </div>

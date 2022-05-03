@@ -12,6 +12,8 @@
             </div>
         </div>
     </div>
+
+    <p>hello </p>
     <template if:true={is_contacts_available}>
         <template if:true={contacts_editable} >
             <lightning-button label="Save" title="Save" onclick={handleSaveContact} class="slds-m-left_x-small"></lightning-button>
@@ -50,7 +52,7 @@
                <template for:each={contacts} for:item="contact">
                 <tr key={contact.Id} class="slds-hint-parent">
                     <td data-label="First Name">
-                        <lightning-input type="checkbox" onchange={handleCheckedContact} value={contact.Id}> </lightning-input>
+                        <lightning-input data-id="checkbox" type="checkbox" onchange={handleCheckedContact} value={contact.Id}> </lightning-input>
                     </td>
                     <td data-label="Contact">
                         <div class="slds-truncate" title="Id" >
@@ -108,13 +110,18 @@
                             </template>  
                         </div>
                     </td>
+                    <td data-label="contact">
+                        <template if:true={contact.iseditable}>
+                            <lightning-button data-id="single_contact_save" label="Save" title="Save" onclick={handleSingleContactSave} value={contact.Id} class="slds-m-left_x-small"></lightning-button>
+                        </template>
+                    </td>
                 </tr>
                </template>
             </tbody>
         </table>
     </template>
 
-    <template if:true={is_opportunities_available}>
+    <!-- <template if:true={is_opportunities_available}>
         
         <table class="slds-table slds-table_cell-buffer slds-table_bordered"
             aria-label="Example default base table of Opportunities">
@@ -176,7 +183,7 @@
                </template>
             </tbody>
         </table>
-    </template>
+    </template> -->
 
 
 

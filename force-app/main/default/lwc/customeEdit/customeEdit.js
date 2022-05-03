@@ -12,9 +12,8 @@ export default class CustomeEdit extends LightningElement {
     @track contacts = [];
     @track opportunities = [];
     @track error = [];
-    @track selected_contacts = [];
-    @track selected_opportunities = [];
-    _temp_contacts = [];
+    selected_contacts = [];
+    selected_opportunities = [];
 
 
     @wire(getAccounts)
@@ -39,6 +38,8 @@ export default class CustomeEdit extends LightningElement {
         return this.opportunities.length > 0;
     }
     handleChange(event){
+        this.contacts_editable = false;
+
         let accountId = event.target.value;
         this.contacts = [];
         this.opportunities = [];
@@ -56,7 +57,11 @@ export default class CustomeEdit extends LightningElement {
                     Email : result[i].Email
                 });
             }
-           // console.log(JSON.stringify(this.contacts));
+            for(let i = 0; i<this.contacts.length; i++){
+                var new_obj = Object.assign({}, this.contacts[i]);
+                this.selected_contacts.push(new_obj);
+            }
+            
         })
         .catch((error)=>{
             console.log('error ' + JSON.stringify(error));
@@ -74,28 +79,67 @@ export default class CustomeEdit extends LightningElement {
         });
     }
     handleCheckedContact(event){
-        this._temp_contacts = [];
-        var _new_temp_var;
-        for(let i = 0; i < this.contacts.length; i++){
-            _new_temp_var = this.contacts[i];
-            if(event.target.value === this.contacts[i].Id){
+        for(let i = 0; i<this.selected_contacts.length; i++){
+            if(this.selected_contacts[i].Id === event.target.value){
                 if(event.target.checked){
-                    _new_temp_var.iseditable = true;
+                    this.selected_contacts[i].iseditable = true;
                 }else{
-                    _new_temp_var.iseditable = false;
+                    this.selected_contacts[i].iseditable = false;
                 }
             }
-            this._temp_contacts.push(_new_temp_var);
         }
     }
     handleSaveContact(event){
         alert('Record got saved successfully');
+        this.contacts_editable = false;
+        let checkboxes = this.template.querySelectorAll('[data-id="checkbox"]');
+        for(let i = 0; i< checkboxes.length; i++){
+            if(checkboxes[i].checked){
+                checkboxes[i].checked = false;
+            }
+        }
+        for(let i = 0; i<this.contacts.length; i++){
+            if(this.contacts[i].iseditable){
+                this.contacts[i].iseditable = false;
+            }
+        }
+
+        // process the contact data and make apex call to save the all contacts
     }
     handleEditContact(event){
         this.contacts_editable = true;
-        this.contacts = this._temp_contacts;
+        this.contacts = [];
+        for(let i = 0; i<this.selected_contacts.length; i++){
+            this.contacts.push(this.selected_contacts[i]);
+        }
+       
     }
-
+    handleSingleContactSave(event){
+        alert('contat has been save successfully ' + event.target.value);
+        let elements = this.template.querySelectorAll('[data-id="checkbox"]');
+        for(let i = 0; i < elements.length; i++){
+            if(event.target.value === elements[i].value){
+                elements[i].checked = false;
+                break;
+            }
+        }
+        
+        var json_data = '';
+        let contactId = event.target.value;
+        for(let i = 0; i<this.selected_contacts.length; i++){
+            if(this.selected_contacts[i].Id === contactId){
+                this.selected_contacts[i].iseditable = false;
+                json_data = this.contacts[i];
+                break;
+            }
+        }
+        this.contacts = [];
+        for(let i = 0; i<this.selected_contacts.length; i++){
+            this.contacts.push(this.selected_contacts[i]);
+        }
+        // process the json_data // remove editable and then update using apex
+        
+    }
 
 }
 

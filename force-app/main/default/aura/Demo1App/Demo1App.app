@@ -3,13 +3,13 @@
     <!-- <c:Demo2AuraAttribute/> -->
     <!-- <c:Demo3AuraAllAttributes /> -->
 
-    <!-- <c:Demo4Facet >
-        This Content will passes to the body 
-        <aura:set attribute="header" >
-            This is Header
+    <!-- <c:Demo4Facet>
+        this text will go to body part
+        <aura:set attribute="header">
+            this is haeder part 
         </aura:set>
         <aura:set attribute="footer">
-            This is Footer
+            this is footer part
         </aura:set>
         <c:Demo1HelloWorld />
         <c:Demo2AuraAttribute />
@@ -33,7 +33,7 @@
     <!-- <c:wrapper /> -->
     <!-- <c:wireService /> -->
     <!-- <c:wireServiceFunction /> -->
-    <c:customeEdit />
+    <!-- <c:customeEdit /> -->
 
     
 

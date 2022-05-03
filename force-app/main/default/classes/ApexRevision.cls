@@ -1,6 +1,59 @@
 public class ApexRevision {
-    
+
+    public static void ApexCreateOpportunityReport(String stageName){
+        // key -> month + year + opp.type + ownerid
+        // value -> Amount, count
+        List<String> months = new List<String>{'Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'};
+        Map<String,Decimal> monthTypeToAmountMap = new Map<String,Decimal>();
+        Map<String,Integer> monthTypeToCountMap = new Map<String,Integer>();
+        for(Opportunity opp : [SELECT Id, Name, CloseDate, Amount, Type,StageName, Owner.Name
+                               FROM Opportunity
+                               WHERE Type != NULL
+                               AND StageName =: stageName]){
+                                   Integer month = opp.CloseDate.month();
+                                   Integer year = opp.CloseDate.year();
+                                   String key = months.get(month - 1) + '*' + year + '*' + opp.Type + '*' + opp.Owner.Name;
+                                   if(!monthTypeToAmountMap.containsKey(key)){
+                                    monthTypeToAmountMap.put(key,0);
+                                    monthTypeToCountMap.put(key,0);
+                                   }
+                                   Decimal value = monthTypeToAmountMap.get(key);
+                                   Integer count = monthTypeToCountMap.get(key);
+                                   count += 1;
+                                   value += opp.Amount;
+                                   monthTypeToAmountMap.put(key, value);
+                                   monthTypeToCountMap.put(key,count);
+                               }
+        for(String key : monthTypeToAmountMap.keySet()){
+            Integer count = monthTypeToCountMap.get(key);
+            Decimal amount = monthTypeToAmountMap.get(key);
+            System.debug(key + '--->' + amount + '---->' + count);
+        }
+    }
+    // copy billing addresses to shipping addresses
+    public static void apexCopyBillingToShipping(Set<Id> accountIdSet){
+        List<Account> accountList = new List<Account>();
+        for(Account acc : [SELECT Id,Name,BillingStreet,BillingCity,
+                           BillingState,BillingPostalCode,BillingCountry
+                           FROM Account 
+                           WHERE Id IN : accountIdSet]){
+                               acc.ShippingStreet = acc.BillingStreet;
+                               acc.ShippingCity = acc.BillingCity;
+                               acc.ShippingCountry = acc.BillingCountry;
+                               acc.ShippingPostalCode = acc.BillingPostalCode;
+
+                               accountList.add(acc);
+                           }
+        if(accountList.size() > 0){
+            update accountList;
+            for(Account acc : accountList){
+                System.debug('Update account id is : ' + acc.Id);
+            }
+        }
+    }
     public static void apexScenario1SolutionUsingSet(){
+
+        
         Set<Id> accountIdSet = new Set<Id>();
         List<Account> accountList = new List<Account>();
         for(Contact con : [SELECT Id, Name, AccountId

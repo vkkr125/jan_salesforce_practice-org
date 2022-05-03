@@ -2,7 +2,6 @@
     doInit : function(component, event, helper) {
         var action = component.get("c.getStudents");
         var action2 = component.get('c.getCourses');
-        
         action.setCallback(this,function(response){
             var state = response.getState();
             if(state === 'SUCCESS'){
@@ -13,7 +12,6 @@
             }
         });
         $A.enqueueAction(action);
-
         action2.setCallback(this,function(responce){
             var state = responce.getState();
             if(state === 'SUCCESS'){
@@ -25,5 +23,4 @@
         });
         $A.enqueueAction(action2);
     }
-
 })
