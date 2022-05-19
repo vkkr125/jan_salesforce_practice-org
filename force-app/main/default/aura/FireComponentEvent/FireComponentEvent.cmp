@@ -1,0 +1,10 @@
+<aura:component controller="DemoGetData">
+    <aura:attribute name="contactList" type="List" />
+    <aura:handler name="init" value="{!this}" action="{!c.doInIt}" />
+    
+    <aura:registerEvent name="componentEvent" type="c:customEvent"/>
+    
+    <p>Child Component Passing Data To the Parent</p>
+    <lightning:button variant="base" label="GetContact" title="Base action" onclick="{! c.handleClick }"/>
+
+</aura:component>	

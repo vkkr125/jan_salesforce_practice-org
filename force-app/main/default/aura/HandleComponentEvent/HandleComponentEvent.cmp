@@ -1,0 +1,68 @@
+<aura:component>
+    <aura:attribute name="message" type="String" />
+    <aura:attribute name="contactList" type="List" />
+    <aura:attribute name="good" type="Boolean" />
+    <aura:attribute name="count" type="Integer" default="0"/>
+
+
+    <c:FireComponentEvent />
+    <aura:handler name="componentEvent" event="c:customEvent" action="{!c.handleComponentEvent}" />
+
+
+    <p>total count of event : {!v.count}</p>
+    <p>Message Passed From Child Component is : {!v.message}</p>
+
+    <aura:if isTrue="{!v.contactList.length > 0}">
+        <table class="slds-table slds-table_cell-buffer slds-table_bordered"
+        aria-labelledby="element-with-table-label other-element-with-table-label">
+        <thead>
+            <tr class="slds-line-height_reset">
+                <th class="" scope="col">
+                    <div class="slds-truncate" title="Opportunity Name">ContactId</div>
+                </th>
+                <th class="" scope="col">
+                    <div class="slds-truncate" title="Account Name">FirstName</div>
+                </th>
+                <th class="" scope="col">
+                    <div class="slds-truncate" title="Close Date">LastName</div>
+                </th>
+                <th class="" scope="col">
+                    <div class="slds-truncate" title="Stage">Phone</div>
+                </th>
+                <th class="" scope="col">
+                    <div class="slds-truncate" title="Confidence">Email</div>
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            <aura:iteration items="{!v.contactList}" var="contact" >
+                <tr class="slds-hint-parent">
+                    <th data-label="Opportunity Name" scope="row">
+                        <div class="slds-truncate" title="Cloudhub">
+                            <a href="#" tabindex="-1">{!contact.Id}</a>
+                        </div>
+                    </th>
+                    <td data-label="Account Name">
+                        <div class="slds-truncate" title="Cloudhub">{!contact.FirstName}</div>
+                    </td>
+                    <td data-label="Close Date">
+                        <div class="slds-truncate" title="4/14/2015">{!contact.LastName}</div>
+                    </td>
+                    <td data-label="Prospecting">
+                        <div class="slds-truncate" title="Prospecting">{!contact.Phone}</div>
+                    </td>
+                    <td data-label="Confidence">
+                        <div class="slds-truncate" title="20%">{!contact.Phone}</div>
+                    </td>
+                    <td data-label="Contact">
+                        <div class="slds-truncate" title="jrogers@cloudhub.com">
+                            <a href="#" tabindex="-1">{!contact.Email}</a>
+                        </div>
+                    </td>
+                </tr>
+            </aura:iteration>
+        </tbody>
+    </table>
+    </aura:if>
+   
+</aura:component>

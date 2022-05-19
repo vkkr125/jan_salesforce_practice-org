@@ -34,8 +34,28 @@
     <!-- <c:wireService /> -->
     <!-- <c:wireServiceFunction /> -->
     <!-- <c:customeEdit /> -->
+    <!-- <c:DisplayContacts /> -->
 
+
+
+    <!-- lwc components testings -->
+    <!-- <c:HandleComponentEvent /> -->
+    <!-- <c:AuraMethods /> -->
+    <!-- <c:eventParentComponent /> -->
+    <!-- <c:eventGrandParentComponent /> -->
+    <!-- <c:apexImpretiveCall /> -->
+    <!-- <c:contactMessagePublisher />
+
+    <c:contactMessageSubscriber /> -->
+
+    <c:Chat_Record_Main />
     
 
 
 </aura:application>
+
+<!-- browser, sysstem event, OOB, custom event -->
+
+<!-- component event, application event -->
+<!-- even comp -->
+<!-- register, fire, (all the message) -->

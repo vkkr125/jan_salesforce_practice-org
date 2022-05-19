@@ -1,0 +1,9 @@
+<template>
+    <lightning-card title="Contacts" icon-name="standard:contact">
+        <template for:each={contacts} for:item="contact">
+            <div key={contact.Id} class="slds-m-left_medium">
+                <c-contact-tile  contact={contact} onchildevent={handleChildEvent}></c-contact-tile>
+            </div>
+        </template>
+    </lightning-card>
+</template>

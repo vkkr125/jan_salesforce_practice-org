@@ -27,7 +27,6 @@
                 <lightning:input name="x" value="{!v.searchinput}" label="Filter" placeholder="Search students by name "/>  
             </div>
         </div>
-
         <!-- data table -->
         <table class="slds-table slds-table_cell-buffer slds-table_bordered"
             aria-labelledby="element-with-table-label other-element-with-table-label">

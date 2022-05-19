@@ -1,0 +1,76 @@
+<template>
+
+
+    <!-- record view form lwc -->
+    <!-- <lightning-card title="Contact" icon-name="standard:contact">
+        <div class="slds-m-left_medium">
+            <lightning-record-view-form object-api-name={objectApiName} record-id={recordId}>
+                 <!- - <lightning-output-field field-name="FirstName"> </lightning-output-field>
+                <lightning-output-field field-name="LastName"> </lightning-output-field>
+                <lightning-output-field field-name="Phone"> </lightning-output-field>
+                <lightning-output-field field-name="Email"> </lightning-output-field>  - ->
+
+
+                <template for:each={fields} for:item="val" >
+                    <lightning-output-field key={Id} field-name={val}> </lightning-output-field>
+                </template>
+            </lightning-record-view-form>
+        </div>
+    </lightning-card>  -->
+
+    <!-- recordEdit From -->
+    <!-- <lightning-card title="Contact" icon-name="standard:contact">
+        <div class="slds-m-left_medium">
+            <lightning-record-edit-form object-api-name={objectApiName} record-id={recordId}  onsuccess={handleSuccess}>
+                <lightning-input-field field-name="FirstName"> </lightning-input-field>
+                <lightning-input-field field-name="LastName"> </lightning-input-field>
+                <lightning-input-field field-name="Phone"> </lightning-input-field>
+                <lightning-input-field field-name="Email"> </lightning-input-field>
+                <div class="slds-var-m-top_medium">
+                    <lightning-button variant="brand" type="submit" label="Save">
+                    </lightning-button>
+                </div>
+            </lightning-record-edit-form>
+        </div>
+    </lightning-card> -->
+
+
+    <!-- create record using record edit form -->
+    <!-- <lightning-card title="Contact" icon-name="standard:contact">
+        <div class="slds-m-left_medium">
+            <lightning-record-edit-form object-api-name={objectApiName} onsuccess={handleSuccess}>
+                <lightning-input-field field-name="FirstName"> </lightning-input-field>
+                <lightning-input-field field-name="LastName"> </lightning-input-field>
+                <lightning-input-field field-name="Phone"> </lightning-input-field>
+                <lightning-input-field field-name="Email"> </lightning-input-field>
+                <div class="slds-var-m-top_medium">
+                    <lightning-button variant="brand" type="submit" label="Save">
+                    </lightning-button>
+                </div>
+            </lightning-record-edit-form>
+        </div>
+    </lightning-card>  -->
+
+
+    <!-- record Form -->
+    <!-- <lightning-card title="Contact Detail" icon-name="standard:contact">
+        <div class="slds-m-left_medium">
+            <lightning-record-form object-api-name={objectApiName} record-id={recordId} fields={fields} onsuccess={handleSuccess} mode="readonly">
+            </lightning-record-form>
+        </div>
+    </lightning-card> -->
+
+
+    <!-- display data by fetching wire service method -->
+    <lightning-card title="Contact Detail" icon-name="standard:contact" >
+        <div class="slds-m-left_medium">
+            <template if:true={contact.data}>
+                <p>{contact.data.fields.FirstName.value}</p>
+                <p>{contact.data.fields.LastName.value}</p>
+                <p>{contact.data.fields.Phone.value}</p>
+                <p>{contact.data.fields.Email.value}</p>
+            </template>
+        </div>
+    </lightning-card>
+
+</template>

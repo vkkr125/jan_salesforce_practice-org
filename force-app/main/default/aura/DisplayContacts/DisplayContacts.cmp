@@ -1,0 +1,66 @@
+<aura:component controller="DemoGetData">
+    <aura:attribute name="selectedAccountId" type="String" default="none" />
+    <aura:attribute name="contactList" type="List" />
+    <aura:attribute name="opportunityList" type="List" />
+    <aura:attribute name="accountList" type="List" />
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}" />
+    <aura:handler name="change" value="{!v.selectedAccountId}" action="{!c.handleChange}" />
+
+    <lightning:select name="select1" label="Select the Account?" required="true" value="{!v.selectedAccountId}">
+        <option value="">choose one...</option>
+        <aura:iteration items="{!v.accountList}" var="item">
+            <option value="{!item.Id}">{!item.Name}</option>
+        </aura:iteration>
+    </lightning:select>
+
+    <aura:if isTrue="{!v.contactList.length == 0}">
+        <p>There is No contact to display</p>
+    </aura:if>
+    <table class="slds-table slds-table_cell-buffer slds-table_bordered"
+        aria-labelledby="element-with-table-label other-element-with-table-label">
+        <thead>
+            <tr class="slds-line-height_reset">
+                <th class="" scope="col">
+                    <div class="slds-truncate" title="Opportunity Name">Contact Id</div>
+                </th>
+                <th class="" scope="col">
+                    <div class="slds-truncate" title="Account Name">First Name</div>
+                </th>
+                <th class="" scope="col">
+                    <div class="slds-truncate" title="Close Date">Last Name</div>
+                </th>
+                <th class="" scope="col">
+                    <div class="slds-truncate" title="Stage">Phone</div>
+                </th>
+                <th class="" scope="col">
+                    <div class="slds-truncate" title="Confidence">Email</div>
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            <aura:iteration items="{!v.contactList}" var="contact">
+                <tr class="slds-hint-parent">
+                    <th data-label="Opportunity Name" scope="row">
+                        <div class="slds-truncate" title="Cloudhub">
+                            <a href="#" tabindex="-1">{!contact.Id}</a>
+                        </div>
+                    </th>
+                    <td data-label="Account Name">
+                        <div class="slds-truncate" title="Cloudhub">{!contact.FirstName}</div>
+                    </td>
+                    <td data-label="Close Date">
+                        <div class="slds-truncate" title="4/14/2015">{!contact.LastName}</div>
+                    </td>
+                    <td data-label="Prospecting">
+                        <div class="slds-truncate" title="Prospecting">{!contact.Phone}</div>
+                    </td>
+                    <td data-label="Contact">
+                        <div class="slds-truncate" title="jrogers@cloudhub.com">
+                            <a href="#" tabindex="-1">{!contact.Email}</a>
+                        </div>
+                    </td>
+                </tr>
+            </aura:iteration>
+        </tbody>
+    </table>
+</aura:component>

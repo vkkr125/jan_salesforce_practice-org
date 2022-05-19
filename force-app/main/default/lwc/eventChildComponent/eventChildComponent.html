@@ -1,0 +1,11 @@
+<template>
+
+    <lightning-card  title="Hello">
+        <div class="slds-m-left_medium">
+            <p>Child Property : {childProperty}</p>
+            <p>child component : message entered in child component : {message}</p>
+            <lightning-input type="text" label="Enter the message to pass to the parent" onchange={handleMessage}></lightning-input>
+            <lightning-button label="Get Contacts" slot="actions" onclick={handleClick}></lightning-button>
+        </div>
+    </lightning-card>
+</template>

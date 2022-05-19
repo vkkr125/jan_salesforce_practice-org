@@ -1,6 +1,7 @@
 <aura:component>
     <aura:attribute name="header" type="Aura.Component[]" />
     <aura:attribute name="footer" type="Aura.Component[]" />
+    
     <p>header facet is : {!v.header}</p>
     <p>footer facet is: {!v.footer}</p>
     <p>body facet is : {!v.body}</p>

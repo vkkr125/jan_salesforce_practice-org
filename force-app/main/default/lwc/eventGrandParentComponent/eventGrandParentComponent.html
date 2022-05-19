@@ -1,0 +1,13 @@
+<template>
+    <lightning-card title="Event Demo" icon-name="standard:contact" >
+        <div class="slds-m-left_medium">
+
+            <p>All Contacts Name : {contacts_names}</p>
+            <p>Grand Parent : Message from child component : {message}</p>
+            <template if:true={is_contact_available}>
+                <lightning-datatable key-field="id" data={contacts} columns={columns}> </lightning-datatable>
+            </template>
+            <c-event-parent-component onchildevent={handleChildEvent}></c-event-parent-component>
+        </div>
+    </lightning-card>
+</template>

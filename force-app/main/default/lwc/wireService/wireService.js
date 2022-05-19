@@ -4,6 +4,7 @@ import { refreshApex } from '@salesforce/apex';
 import { updateRecord } from 'lightning/uiRecordApi';
 import updateContacts from '@salesforce/apex/DemoGetData.updateContacts';
 import { getRecordNotifyChange } from 'lightning/uiRecordApi';
+import getPickListValuesIntoList from '@salesforce/apex/DemoWrapper.getPickListValuesIntoList';
 
 import ID_FIELD from '@salesforce/schema/Contact.Id';
 import FIRSTNAME_FIELD from '@salesforce/schema/Contact.FirstName';
@@ -26,7 +27,6 @@ export default class WireService extends LightningElement {
 
     @wire(getContacts)
     contact_data;
-
 
      /// update single row using updateRecord lwc method
     // handleSave(event) {
