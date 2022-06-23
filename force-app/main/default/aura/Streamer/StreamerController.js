@@ -1,5 +1,4 @@
-
- ({
+({
     /**
      * Connects to Streaming API
      * @param component

@@ -29,7 +29,7 @@
     <!-- <c:CollegeTopperName/> -->
 
     <!-- <c:Pagination2 /> -->
-    <!-- <c:Pagination1 /> -->
+    <c:Pagination1 />
     <!-- <c:wrapper /> -->
     <!-- <c:wireService /> -->
     <!-- <c:wireServiceFunction /> -->
@@ -48,7 +48,7 @@
 
     <c:contactMessageSubscriber /> -->
 
-    <c:Chat_Record_Main />
+    <!-- <c:Chat_Record_Main /> -->
     
 
 

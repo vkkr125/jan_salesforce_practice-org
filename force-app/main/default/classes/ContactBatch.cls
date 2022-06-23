@@ -57,9 +57,11 @@ global class ContactBatch implements Database.Batchable<sObject>, Database.state
         Messaging.SingleEmailMessage[] emailList = new List<Messaging.SingleEmailMessage>();
         emailList.add(email);
         Messaging.sendEmail(emailList,false);
+        
+     
+        
     }
     
     // Database.executeBatch(new )
 
 }
-

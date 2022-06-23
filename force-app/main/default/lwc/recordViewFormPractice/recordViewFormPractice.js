@@ -30,4 +30,3 @@ export default class RecordViewFormPractice extends LightningElement {
 //  view record 
 //  edit record
 //  create new record
-

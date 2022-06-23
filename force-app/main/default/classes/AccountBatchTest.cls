@@ -9,7 +9,6 @@ global class AccountBatchTest implements Database.Batchable<sObject>,Database.st
             acc.Industry = 'Education';
         }
         update accList;
-        
     }
     global void finish(Database.BatchableContext bc){
         // notify the user 

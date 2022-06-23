@@ -1,0 +1,276 @@
+<template>
+
+    <lightning-card title="Account Details" icon-name="standard:account">
+        <div class="slds-m-left_large">
+            <lightning-record-form object-api-name={objectApiName} record-id={recordId} fields={fields}>
+            </lightning-record-form>
+        </div>
+    </lightning-card>
+    <hr>
+    <lightning-card title="All Related Contacts" icon-name="standard:account">
+        <div class="slds-m-left_large">
+            <template if:true={showContactSpiner}>
+                <lightning-spinner alternative-text="Loading" size="small"></lightning-spinner>
+            </template>
+            <template if:true={selected_contact_count}>
+                <lightning-button label="Save" title="Edit Selected" onclick={saveSelectedContacts}
+                    class="slds-m-left_x-small"></lightning-button>
+            </template>
+            <template if:false={selected_contact_count}>
+                <lightning-button label="Edit" title="Edit Selected" onclick={editSelectedContacts}
+                    class="slds-m-left_x-small"></lightning-button>
+                <lightning-button label="Add New" title="Add New Contact" onclick={handleAddNewContact}
+                    class="slds-m-left_x-small"></lightning-button>
+            </template>
+            <table class="slds-table slds-table_cell-buffer slds-table_bordered"
+                aria-labelledby="element-with-table-label other-element-with-table-label">
+                <thead>
+                    <tr class="slds-line-height_reset">
+                        <th class="" scope="col">
+                            <div class="slds-truncate" title="Contact ID">select</div>
+                        </th>
+                        <th class="" scope="col">
+                            <div class="slds-truncate" title="Contact ID">Contact Id</div>
+                        </th>
+                        <th class="" scope="col">
+                            <div class="slds-truncate" title="Contact First Name">FirstName</div>
+                        </th>
+                        <th class="" scope="col">
+                            <div class="slds-truncate" title="Contact LastName">LastName</div>
+                        </th>
+                        <th class="" scope="col">
+                            <div class="slds-truncate" title="Phone No">Phone</div>
+                        </th>
+                        <th class="" scope="col">
+                            <div class="slds-truncate" title="Email">Email</div>
+                        </th>
+                        <th>
+                            <div class="slds-truncate" title="Action">Action</div>
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <template if:true={view}>
+                        <template for:each={view.wrapper_contactList} for:item="item">
+                            <tr key={item.contactObj.Id} class="slds-hint-parent">
+
+                                <td data-label="Contact Select">
+                                    <!-- select checkbox -->
+                                    <lightning-input type="checkbox" data-id="contact-select" name={item.contactObj.Id}
+                                        onchange={handleSelectedContact}></lightning-input>
+                                </td>
+                                <th data-label="Opportunity Name" scope="row">
+                                    <div class="slds-truncate" title="Cloudhub">
+                                        <a href="#" tabindex="-1">{item.contactObj.Id}</a>
+                                    </div>
+                                </th>
+                                <td data-label="Contact FirstName">
+                                    <template if:true={item.isEditable}>
+                                        <lightning-input type="text" value={item.contactObj.FirstName}
+                                            data-id={item.contactObj.Id}></lightning-input>
+                                    </template>
+                                    <template if:false={item.isEditable}>
+                                        <div class="slds-truncate" title="FirstName">{item.contactObj.FirstName}</div>
+                                    </template>
+                                </td>
+                                <td data-label="Close Date">
+                                    <template if:true={item.isEditable}>
+                                        <lightning-input type="text" value={item.contactObj.LastName}
+                                            data-id={item.contactObj.Id}></lightning-input>
+                                    </template>
+                                    <template if:false={item.isEditable}>
+                                        <div class="slds-truncate" title="LastName">{item.contactObj.LastName}</div>
+                                    </template>
+                                </td>
+                                <td data-label="Prospecting">
+                                    <template if:true={item.isEditable}>
+                                        <lightning-input type="text" value={item.contactObj.Phone}
+                                            data-id={item.contactObj.Id}>
+                                        </lightning-input>
+                                    </template>
+                                    <template if:false={item.isEditable}>
+                                        <div class="slds-truncate" title="LastName">{item.contactObj.Phone}</div>
+                                    </template>
+                                </td>
+                                <td data-label="Contact">
+                                    <template if:true={item.isEditable}>
+                                        <lightning-input type="email" value={item.contactObj.Email}
+                                            data-id={item.contactObj.Id}></lightning-input>
+                                    </template>
+                                    <template if:false={item.isEditable}>
+                                        <div class="slds-truncate" title="Email">
+                                            <a href="#" tabindex="-1">{item.contactObj.Email}</a>
+                                        </div>
+                                    </template>
+
+                                </td>
+                                <td data-label="Contact">
+                                    <div class="slds-truncate" title="edit">
+                                        <template if:true={item.isEditable}>
+                                            <lightning-button label="Save" title="Save" value={item.contactObj.Id}
+                                                onclick={handleContactEnlineSave} class="slds-m-left_xxx-small">
+                                            </lightning-button>
+                                        </template>
+                                        <template if:false={item.isEditable}>
+                                            <lightning-button label="Edit" title="Edit" value={item.contactObj.Id}
+                                                onclick={handleContactEnlineEdit} class="slds-m-left_xxx-small">
+                                            </lightning-button>
+                                        </template>
+                                        <!-- <svg aria-hidden="true" class="slds-icon" title="when needed">
+                                            <use xlink:href="/assets/icons/standard-sprite/svg/symbols.svg#edit"></use>
+                                        </svg>
+                                        <svg aria-hidden="true" class="slds-icon" title="when needed">
+                                            <use xlink:href="/assets/icons/standard-sprite/svg/symbols.svg#save"></use>
+                                        </svg> -->
+
+                                    </div>
+                                </td>
+                            </tr>
+                        </template>
+                    </template>
+
+                </tbody>
+            </table>
+        </div>
+    </lightning-card>
+    <hr>
+
+    <lightning-card title="All Related Opportunities" icon-name="standard:account">
+        <div class="slds-m-left_large">
+            <template if:true={showOpportunitSpinnder}>
+                <lightning-spinner alternative-text="Loading" size="small"></lightning-spinner>
+            </template>
+            <template if:true={selected_opportunity_count}>
+                <lightning-button label="Save" title="Edit Selected" onclick={saveSelectedOpportunity}
+                    class="slds-m-left_x-small"></lightning-button>
+            </template>
+            <template if:false={selected_opportunity_count}>
+                <lightning-button label="Edit" title="Edit Selected" onclick={editSelectedOpportunity}
+                    class="slds-m-left_x-small"></lightning-button>
+                <lightning-button label="Add New" title="Add New Contact" onclick={handleAddNewOpportunity}
+                    class="slds-m-left_x-small"></lightning-button>
+            </template>
+            <table class="slds-table slds-table_cell-buffer slds-table_bordered"
+                aria-labelledby="element-with-table-label other-element-with-table-label">
+                <thead>
+                    <tr class="slds-line-height_reset">
+                        <th class="" scope="col">
+                            <div class="slds-truncate" title="select check-boxes">select</div>
+                        </th>
+                        <th class="" scope="col">
+                            <div class="slds-truncate" title="Opportunity ID">OpportunityId</div>
+                        </th>
+                        <th class="" scope="col">
+                            <div class="slds-truncate" title="Opportunity Name">Name</div>
+                        </th>
+                        <th class="" scope="col">
+                            <div class="slds-truncate" title="StageName">StageName</div>
+                        </th>
+                        <th class="" scope="col">
+                            <div class="slds-truncate" title="Close Date">Close Date</div>
+                        </th>
+                        <th class="" scope="col">
+                            <div class="slds-truncate" title="Amount">Amount</div>
+                        </th>
+                        <th>
+                            <div class="slds-truncate" title="Action">Action</div>
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <template if:true={view}>
+                        <template for:each={view.wrapper_opportunityList} for:item="item">
+                            <tr key={item.opportunityObj.Id} class="slds-hint-parent">
+
+                                <td data-label="Contact Select">
+                                    <!-- select checkbox -->
+                                    <lightning-input type="checkbox" data-id="opportunity-select"
+                                        name={item.opportunityObj.Id} onchange={handleSelectedOpportunity}>
+                                    </lightning-input>
+                                </td>
+                                <th data-label="Opportunity Name" scope="row">
+                                    <div class="slds-truncate" title="Cloudhub">
+                                        <a href="#" tabindex="-1">{item.opportunityObj.Id}</a>
+                                    </div>
+                                </th>
+                                <td data-label="Contact FirstName">
+                                    <template if:true={item.isEditable}>
+                                        <lightning-input type="text" value={item.opportunityObj.Name}
+                                            data-id={item.opportunityObj.Id}></lightning-input>
+                                    </template>
+                                    <template if:false={item.isEditable}>
+                                        <div class="slds-truncate" title="FirstName">{item.opportunityObj.Name}</div>
+                                    </template>
+                                </td>
+                                <td data-label="Close Date">
+                                    <template if:true={item.isEditable}>
+                                        <!-- <lightning-input type="text"
+                                            value={item.opportunityObj.StageName} data-id={item.opportunityObj.Id}></lightning-input> -->
+                                        <div class="slds-form-element">
+                                            <label class="slds-form-element__label" for="select-01">Select Label</label>
+                                            <div class="slds-form-element__control">
+                                                <div class="slds-select_container">
+                                                    <select class="slds-select" data-id={item.opportunityObj.Id}>
+                                                        <option value={item.opportunityObj.StageName}> {item.opportunityObj.StageName}</option>
+                                                        <template for:each={stageNameList} for:item="item">
+                                                            <option key={id}>{item}</option>
+                                                        </template>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </template>
+                                    <template if:false={item.isEditable}>
+                                        <div class="slds-truncate" title="StageName">{item.opportunityObj.StageName}
+                                        </div>
+                                    </template>
+                                </td>
+                                <td data-label="Close Date">
+                                    <template if:true={item.isEditable}>
+                                        <lightning-input type="date" value={item.opportunityObj.CloseDate}
+                                            data-id={item.opportunityObj.Id}></lightning-input>
+                                    </template>
+                                    <template if:false={item.isEditable}>
+                                        <div class="slds-truncate" title="StageName">{item.opportunityObj.CloseDate}
+                                        </div>
+                                    </template>
+                                </td>
+                                <td data-label="Prospecting">
+                                    <template if:true={item.isEditable}>
+                                        <lightning-input type="text" value={item.opportunityObj.Amount}
+                                            data-id={item.opportunityObj.Id}>
+                                        </lightning-input>
+                                    </template>
+                                    <template if:false={item.isEditable}>
+                                        <div class="slds-truncate" title="LastName">{item.opportunityObj.Amount}</div>
+                                    </template>
+                                </td>
+                                <td data-label="Contact">
+                                    <div class="slds-truncate" title="edit">
+                                        <template if:true={item.isEditable}>
+                                            <lightning-button label="Save" title="Save" value={item.opportunityObj.Id}
+                                                onclick={handleOpportunityEnlineSave} class="slds-m-left_xxx-small">
+                                            </lightning-button>
+                                        </template>
+                                        <template if:false={item.isEditable}>
+                                            <lightning-button label="Edit" title="Edit" value={item.opportunityObj.Id}
+                                                onclick={handleOpportunityEnlineEdit} class="slds-m-left_xxx-small">
+                                            </lightning-button>
+                                        </template>
+                                        <!-- <svg aria-hidden="true" class="slds-icon" title="when needed">
+                                            <use xlink:href="/assets/icons/standard-sprite/svg/symbols.svg#edit"></use>
+                                        </svg>
+                                        <svg aria-hidden="true" class="slds-icon" title="when needed">
+                                            <use xlink:href="/assets/icons/standard-sprite/svg/symbols.svg#save"></use>
+                                        </svg> -->
+                                    </div>
+                                </td>
+                            </tr>
+                        </template>
+                    </template>
+                </tbody>
+            </table>
+        </div>
+    </lightning-card>
+
+</template>

@@ -1,5 +1,4 @@
-
- ({
+({
     onRender: function (component, event, helper) {
         const evt = component.getEvent("messageRendered");
         evt.setParams({

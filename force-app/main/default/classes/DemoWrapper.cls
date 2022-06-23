@@ -1,6 +1,6 @@
 public with sharing class DemoWrapper {
 
-    @AuraEnabled
+    @AuraEnabled(cacheable=true)
     public static List<String> getPickListValuesIntoList(){
          List<String> pickListValuesList= new List<String>();
          Schema.DescribeFieldResult fieldResult = Opportunity.StageName.getDescribe();
@@ -25,12 +25,14 @@ public with sharing class DemoWrapper {
         upsert wrapper.contactObj;
         return wrapper.contactObj.Id;
     }
-    @AuraEnabled
+    
+    @AuraEnabled(cacheable=true)
     public static List<Account> getAccounts(){
        List<Account> accountList = new List<Account>();
        accountList = [SELECT Id, Name, Active__c FROM Account LIMIT 100];
        return accountList;
     }
+   
     @AuraEnabled
     public static void saveData(String jsonString){
         JSONwrapper wrapper = new JSONwrapper();
@@ -55,7 +57,7 @@ public with sharing class DemoWrapper {
 
     }
 
-    @AuraEnabled
+    @AuraEnabled(cacheable=true)
     public static String getdata(String accountId){
         List<Contact> contactList = new List<Contact>();
         List<Opportunity> opportunityList = new List<Opportunity>();

@@ -1,9 +1,9 @@
 <aura:component controller="DemoGetData">
     <aura:attribute name="contactList" type="List" />
     <aura:handler name="init" value="{!this}" action="{!c.doInIt}" />
-    
+
     <c:AuraMessages aura:id="auramessage" />
     <p>passing data from parent component to child component</p>
     <lightning:button variant="brand" label="pass" title="Brand action" onclick="{! c.handleClick }" />
-
-</aura:component>	
+   
+</aura:component>

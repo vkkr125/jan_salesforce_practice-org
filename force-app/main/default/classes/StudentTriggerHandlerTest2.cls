@@ -60,7 +60,7 @@ public class StudentTriggerHandlerTest2 {
     public static void testStudentCountOnUndelete(){
         List<Student__c> studentList = [SELECT Id, College__c FROM Student__c WHERE Name LIKE 'teststudent%'];
         List<College__c> collegeList = [SELECT Id FROM College__c WHERE Name LIKE 'testcollege%'];
-        
+                
         List<Student__c> deleteList = new List<Student__c>();
         for(Student__c stud : studentList){
             if(stud.College__c != collegeList.get(0).Id){
@@ -81,7 +81,6 @@ public class StudentTriggerHandlerTest2 {
                               WHERE Id IN : CollegeList]){
             System.assertEquals(10, clg.Student_Count__c);
         }
-        
         
     }
 }

@@ -7,8 +7,6 @@
         <aura:attribute name="message" type="String" default="message from child component" />
         <aura:attribute name="contactList" type="List" />
     </aura:method>
-
-    
     <aura:if isTrue="{!v.contact_list.length > 0}">
         <table class="slds-table slds-table_cell-buffer slds-table_bordered"
             aria-labelledby="element-with-table-label other-element-with-table-label">

@@ -1,4 +1,4 @@
- <aura:component description="Alert">
+<aura:component description="Alert">
 
     <aura:handler event="c:AlertEvent" action="{!c.setAlert}" />
 

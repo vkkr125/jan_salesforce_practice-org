@@ -7,4 +7,4 @@
     <p>Child Component Passing Data To the Parent</p>
     <lightning:button variant="base" label="GetContact" title="Base action" onclick="{! c.handleClick }"/>
 
-</aura:component>	
+</aura:component>

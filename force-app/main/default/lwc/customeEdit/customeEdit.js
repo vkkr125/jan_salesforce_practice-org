@@ -138,7 +138,8 @@ export default class CustomeEdit extends LightningElement {
             this.contacts.push(this.selected_contacts[i]);
         }
         // process the json_data // remove editable and then update using apex
-        
+
+
     }
 
 }

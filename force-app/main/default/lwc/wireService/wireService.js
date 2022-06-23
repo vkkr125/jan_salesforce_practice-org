@@ -4,7 +4,6 @@ import { refreshApex } from '@salesforce/apex';
 import { updateRecord } from 'lightning/uiRecordApi';
 import updateContacts from '@salesforce/apex/DemoGetData.updateContacts';
 import { getRecordNotifyChange } from 'lightning/uiRecordApi';
-import getPickListValuesIntoList from '@salesforce/apex/DemoWrapper.getPickListValuesIntoList';
 
 import ID_FIELD from '@salesforce/schema/Contact.Id';
 import FIRSTNAME_FIELD from '@salesforce/schema/Contact.FirstName';
@@ -27,6 +26,7 @@ export default class WireService extends LightningElement {
 
     @wire(getContacts)
     contact_data;
+
 
      /// update single row using updateRecord lwc method
     // handleSave(event) {
@@ -107,7 +107,7 @@ export default class WireService extends LightningElement {
         
         // Prepare the record IDs for getRecordNotifyChange()
         const notifyChangeIds = updatedFields.map(row => { return { "recordId": row.Id } });
-
+    
         try {
             // Pass edited fields to the updateContacts Apex controller
             const result = await updateContacts({data: updatedFields});
@@ -119,8 +119,10 @@ export default class WireService extends LightningElement {
                     variant: 'success'
                 })
             );
+    
             // Refresh LDS cache and wires
             getRecordNotifyChange(notifyChangeIds);
+    
             // Display fresh data in the datatable
             refreshApex(this.contact_data).then(() => {
                 // Clear all draft values in the datatable
@@ -137,16 +139,21 @@ export default class WireService extends LightningElement {
         };
     }
 
+
+
+
+
+    
 }
 
 
+
+// wire service to display data
+// wire service with function to display data
+// display contact, opportunity by selecting AccountId // extra enable inline editing -> wire service with paremeter
 // 1 more example of wire service with parameter 
 // wire service with parameter and function
 // apex imperetive call by click and select
 // data passing by event from child to parent and handling the event
 // data table with inline editing
-// message channel example 
-// pagination and custome enline editing 
-// read the documentation also
-// revise all the apex codes // apex // perform demo's
-// trigger's apex and validation with triggers and all
+// message channel example

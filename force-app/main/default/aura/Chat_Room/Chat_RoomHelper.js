@@ -1,5 +1,4 @@
-
- ({
+({
     /**
      * Load current user record
      * @param component

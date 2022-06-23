@@ -46,7 +46,7 @@ export default class WireServiceFunction extends LightningElement {
             this.contacts = result;
         })
         .catch(error =>{
-            console.log('error while loading the contact data' + error);
+            console.log('error while loading the contact data');
         });
 
         getOpportunityParam({accountId : accountId})
@@ -58,5 +58,6 @@ export default class WireServiceFunction extends LightningElement {
             console.log('error while loading the opportunity data');
         });
     }
-    
+
+
 }

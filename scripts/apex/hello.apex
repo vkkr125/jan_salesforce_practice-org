@@ -6,18 +6,15 @@
 //     SFDX: Execute Anonymous Apex with Editor Contents
 
 
-// Set<Id> accountIdSet = new Set<Id>();
-// for(Account acc : [SELECT Id, Name FROM Account])
-//     accountIdSet.add(acc.Id);
+Set<Id> accountIdSet = new Set<Id>();
+for(Account acc : [SELECT Id, Name FROM Account])
+    accountIdSet.add(acc.Id);
 
-// Map<Id, List<Opportunity>> accountIdToOpportunityMapList = AssignmentOnAccountObject.returnsAllOpprotunityOfAccountIds(accountIdSet);
-// for(Id accountId : accountIdToOpportunityMapList.keySet()){
-//     String res = accountId + ':->';
-//     for(Opportunity opp : accountIdToOpportunityMapList.get(accountId)){
-//         res += opp.Name + '*';
-//     }
-//     System.debug(res);
-// }
-
-
-ApexRevision.ApexCreateOpportunityReport('Closed Won');
+Map<Id, List<Opportunity>> accountIdToOpportunityMapList = AssignmentOnAccountObject.returnsAllOpprotunityOfAccountIds(accountIdSet);
+for(Id accountId : accountIdToOpportunityMapList.keySet()){
+    String res = accountId + ':->';
+    for(Opportunity opp : accountIdToOpportunityMapList.get(accountId)){
+        res += opp.Name + '*';
+    }
+    System.debug(res);
+}

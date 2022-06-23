@@ -69,6 +69,7 @@
                 <p>{contact.data.fields.LastName.value}</p>
                 <p>{contact.data.fields.Phone.value}</p>
                 <p>{contact.data.fields.Email.value}</p>
+                <p><lightning-formatted-text value={contact.data.fields.Email.value} ></lightning-formatted-text></p>
             </template>
         </div>
     </lightning-card>
